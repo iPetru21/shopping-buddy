@@ -1,24 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
+import LandingPage from './views/landing/LandingPage';
+import SignIn from './views/auth/SignIn';
+import SignUp from './views/auth/SignUp';
+import Dashboard from './views/dashboard/Dashboard';
 
 function App() {
+  const [selectedView, setSelectedView] = useState('dashboard');
+
+  const renderView = () => {
+    switch (selectedView) {
+      case 'home':
+        return <LandingPage/>;
+      case 'sign-in':
+        return <SignIn/>;
+      case 'sign-up':
+        return <SignUp/>;
+      case 'dashboard':
+        return <Dashboard/>;
+      default:
+        return <div>Home View</div>;
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      { renderView() }
+    </>
   );
 }
 
